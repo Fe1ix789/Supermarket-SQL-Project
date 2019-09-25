@@ -1,0 +1,210 @@
+Last login: Tue Dec  4 21:25:30 on ttys001
+Antonias-Air-2:~ antoniaschulze$ docker exec -it db2server bash -c "su - db2inst1"
+Last login: Tue Dec  4 21:20:15 UTC 2018
+[db2inst1@db2server_4dae6a ~]$ db2 connect to sample;
+
+   Database Connection Information
+
+ Database server        = DB2/LINUXX8664 11.1.3.3
+ SQL authorization ID   = DB2INST1
+ Local database alias   = SAMPLE
+
+[db2inst1@db2server_4dae6a ~]$ db2 -vtf Final_Code.sql
+DB21005E  An error occurred while accessing the file "Fina?l_Code.sql".
+
+[db2inst1@db2server_4dae6a ~]$ db2 -vtf Final_code.sql
+DROP TABLE PRODUCTS
+DB20000I  The SQL command completed successfully.
+
+DROP TABLE PAYMENTS
+DB20000I  The SQL command completed successfully.
+
+DROP TABLE BRANDS
+DB20000I  The SQL command completed successfully.
+
+DROP TABLE TICKET
+DB20000I  The SQL command completed successfully.
+
+CREATE TABLE PRODUCTS ( Product_id INT NOT NULL, Product_name VARCHAR(45) NOT NULL, Cost_price INT NOT NULL, Sale_price INT NOT NULL, PRIMARY KEY (Product_id) )ORGANIZE BY ROW
+DB20000I  The SQL command completed successfully.
+
+CREATE TABLE PAYMENTS ( Payment_id INT NOT NULL, Payment_method VARCHAR(45) NOT NULL, PRIMARY KEY (Payment_id) )ORGANIZE BY ROW
+DB20000I  The SQL command completed successfully.
+
+CREATE TABLE BRANDS( Brand_id INT NOT NULL, Brand_name VARCHAR(45) NOT NULL, PRIMARY KEY(Brand_id) ) ORGANIZE BY ROW
+DB20000I  The SQL command completed successfully.
+
+Create TABLE TICKET( Purchase_Records INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY, Ticket_id INT NOT NULL, Product_id INT NOT NULL, Brand_id INT NOT NULL, Payment_id INT NOT NULL, Purchase_date DATE NOT NULL, Amount INT, FOREIGN KEY (Product_id) REFERENCES PRODUCTS (Product_id), FOREIGN KEY (Brand_id) REFERENCES BRANDS (Brand_id), FOREIGN KEY (Payment_id)  REFERENCES PAYMENTS (Payment_id) ) ORGANIZE BY ROW
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO PAYMENTS (Payment_id, Payment_method) VALUES (1,'Visa'), (2,'MasterCard'), (3,'AmericanExpress'), (4,'CASH')
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO PRODUCTS(Product_id,Product_name,Sale_Price,Cost_Price) VALUES (1,'Bread',11,2), (2,'Milk',5,2), (3,'Water',3,1), (4,'Gin',37,20), (5,'Tonic',8,7), (6,'Apple',49,14), (7,'Banana',39,22), (8,'Butter',29,14), (9,'Cheese',61,33), (10,'Joghurt',53,23), (11,'Juice',52,3), (12,'Wodka',39,10), (13,'Jamon',26,14), (14,'Whisky',36,20)
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO BRANDS (BRAND_ID, BRAND_NAME) VALUES (1,'WASA'), (2,'Nestle'), (3,'Tanqueray'), (4,'Thomas Henry'), (5,'Fruits-Import'), (6,'Puerto de Indias'), (7,'Kaergarden'), (8,'Geramont'), (9,'Activia'), (10,'Schweppes'), (11,'Multi'), (12,'Smirnoff'), (13,'Monkey47'), (14,'Jamon Sevilla'), (15,'Jamoneria'), (16,'Fruteria'), (17,'DANONE'), (18,'Bombay'), (19,'JW')
+DB20000I  The SQL command completed successfully.
+
+INSERT INTO TICKET (Ticket_id, Product_id, Brand_id, Payment_id, Purchase_date, Amount) VALUES (1,1,2,1,'2018-11-26',207), (1,2,11,2,'2018-11-26',207), (1,3,9,2,'2018-11-26',207), (1,5,6,2,'2018-11-26',207), (1,5,5,2,'2018-11-26',207), (1,7,12,2,'2018-11-26',207), (1,8,4,2,'2018-11-26',207), (1,8,12,2,'2018-11-26',207), (1,12,11,2,'2018-11-26',207), (1,14,12,2,'2018-11-26',207), (2,2,8,1,'2018-11-27',300), (2,3,13,3,'2018-11-27',300), (2,3,1,3,'2018-11-27',300), (2,4,6,3,'2018-11-27',300), (2,5,15,3,'2018-11-27',300), (2,7,13,3,'2018-11-27',300), (2,8,4,3,'2018-11-27',300), (2,9,13,3,'2018-11-27',300), (2,10,5,3,'2018-11-27',300), (2,13,16,3,'2018-11-27',300), (2,14,10,3,'2018-11-27',300), (3,3,3,4,'2018-11-28',280), (3,4,6,4,'2018-11-28',280), (3,7,18,4,'2018-11-28',280), (3,9,10,4,'2018-11-28',280), (3,12,9,4,'2018-11-28',280), (3,12,18,4,'2018-11-28',280), (3,13,5,4,'2018-11-28',280), (3,14,19,4,'2018-11-28',280), (4,1,19,1,'2018-11-29',391), (4,3,1,1,'2018-11-29',391), (4,4,17,1,'2018-11-29',391), (4,5,14,1,'2018-11-29',391), (4,5,18,1,'2018-11-29',391), (4,6,12,1,'2018-11-29',391), (4,10,4,1,'2018-11-29',391), (4,10,12,1,'2018-11-29',391), (4,11,8,1,'2018-11-29',391), (4,11,10,1,'2018-11-29',391), (4,12,17,1,'2018-11-29',391), (4,13,12,1,'2018-11-29',391), (5,5,1,3,'2018-11-30',322), (5,5,9,3,'2018-11-30',322), (5,6,16,3,'2018-11-30',322), (5,8,10,3,'2018-11-30',322), (5,9,15,3,'2018-11-30',322), (5,10,7,3,'2018-11-30',322), (5,11,5,3,'2018-11-30',322), (5,13,1,3,'2018-11-30',322), (5,14,18,3,'2018-11-30',322), (6,1,11,1,'2018-12-01',221), (6,2,13,1,'2018-12-01',221), (6,3,5,1,'2018-12-01',221), (6,4,12,1,'2018-12-01',221), (6,5,2,1,'2018-12-01',221), (6,10,13,1,'2018-12-01',221), (6,11,12,1,'2018-12-01',221), (6,11,3,1,'2018-12-01',221), (7,1,7,1,'2018-12-02',451), (7,2,17,1,'2018-12-02',451), (7,2,8,1,'2018-12-02',451), (7,2,17,1,'2018-12-02',451), (7,4,2,1,'2018-12-02',451), (7,6,1,1,'2018-12-02',451), (7,6,5,1,'2018-12-02',451), (7,7,6,1,'2018-12-02',451), (7,8,19,1,'2018-12-02',451), (7,9,7,1,'2018-12-02',451), (7,9,6,1,'2018-12-02',451), (7,9,6,1,'2018-12-02',451), (7,12,6,1,'2018-12-02',451), (8,1,19,2,'2018-12-03',303), (8,3,16,2,'2018-12-03',303), (8,3,4,2,'2018-12-03',303), (8,6,12,2,'2018-12-03',303), (8,7,2,2,'2018-12-03',303), (8,7,15,2,'2018-12-03',303), (8,8,14,2,'2018-12-03',303), (8,11,9,2,'2018-12-03',303), (8,11,12,2,'2018-12-03',303), (8,13,14,2,'2018-12-03',303), (9,1,7,1,'2018-12-04',315), (9,1,6,1,'2018-12-04',315), (9,4,11,1,'2018-12-04',315), (9,8,14,1,'2018-12-04',315), (9,9,2,1,'2018-12-04',315), (9,11,9,1,'2018-12-04',315), (9,12,3,1,'2018-12-04',315), (9,12,16,1,'2018-12-04',315), (9,14,4,1,'2018-12-04',315), (10,1,4,3,'2018-12-05',164), (10,1,2,3,'2018-12-05',164), (10,2,3,3,'2018-12-05',164), (10,3,5,3,'2018-12-05',164), (10,4,5,3,'2018-12-05',164), (10,5,5,3,'2018-12-05',164), (10,5,1,3,'2018-12-05',164), (10,8,12,3,'2018-12-05',164), (10,11,6,3,'2018-12-05',164), (11,2,8,2,'2018-12-06',368), (11,5,4,2,'2018-12-06',368), (11,5,10,2,'2018-12-06',368), (11,7,18,2,'2018-12-06',368), (11,10,17,2,'2018-12-06',368), (11,10,15,2,'2018-12-06',368), (11,11,18,2,'2018-12-06',368), (11,12,10,2,'2018-12-06',368), (11,12,16,2,'2018-12-06',368), (11,14,16,2,'2018-12-06',368), (11,14,17,2,'2018-12-06',368), (12,1,6,3,'2018-12-07',375), (12,1,10,3,'2018-12-07',375), (12,5,8,3,'2018-12-07',375), (12,7,14,3,'2018-12-07',375), (12,7,10,3,'2018-12-07',375), (12,9,5,3,'2018-12-07',375), (12,9,12,3,'2018-12-07',375), (12,10,5,3,'2018-12-07',375), (12,10,16,3,'2018-12-07',375), (12,12,2,3,'2018-12-07',375), (13,1,8,4,'2018-12-08',51), (13,3,16,4,'2018-12-08',51), (13,5,1,4,'2018-12-08',51), (13,8,17,4,'2018-12-08',51), (13,14,19,4,'2018-12-08',51), (14,1,7,3,'2018-12-09',132), (14,2,7,3,'2018-12-09',132), (14,8,2,3,'2018-12-09',132), (14,11,17,3,'2018-12-09',132), (15,1,15,1,'2018-12-10',645), (15,1,15,1,'2018-12-10',645), (15,2,1,1,'2018-12-10',645), (15,2,3,1,'2018-12-10',645), (15,2,14,1,'2018-12-10',645), (15,3,2,1,'2018-12-10',645), (15,4,2,1,'2018-12-10',645), (15,5,7,1,'2018-12-10',645), (15,6,8,1,'2018-12-10',645), (15,8,7,1,'2018-12-10',645), (15,8,15,1,'2018-12-10',645), (15,8,7,1,'2018-12-10',645), (15,9,8,1,'2018-12-10',645), (15,10,3,1,'2018-12-10',645), (15,10,13,1,'2018-12-10',645), (15,11,13,1,'2018-12-10',645), (15,12,10,1,'2018-12-10',645), (15,12,3,1,'2018-12-10',645), (15,12,13,1,'2018-12-10',645)
+DB20000I  The SQL command completed successfully.
+
+(15,13,4,1,'2018-12-10',645), (15,13,5,1,'2018-12-10',645), (15,14,19,1,'2018-12-10',645)
+DB21034E  The command was processed as an SQL statement because it was not a 
+valid Command Line Processor command.  During SQL processing it returned:
+SQL0104N  An unexpected token "(" was found following "BEGIN-OF-STATEMENT".  
+Expected tokens may include:  "<values>".  SQLSTATE=42601
+
+SELECT * FROM TICKET LIMIT 10
+
+PURCHASE_RECORDS TICKET_ID   PRODUCT_ID  BRAND_ID    PAYMENT_ID  PURCHASE_DATE AMOUNT     
+---------------- ----------- ----------- ----------- ----------- ------------- -----------
+               1           1           1           2           1 11/26/2018            207
+               2           1           2          11           2 11/26/2018            207
+               3           1           3           9           2 11/26/2018            207
+               4           1           5           6           2 11/26/2018            207
+               5           1           5           5           2 11/26/2018            207
+               6           1           7          12           2 11/26/2018            207
+               7           1           8           4           2 11/26/2018            207
+               8           1           8          12           2 11/26/2018            207
+               9           1          12          11           2 11/26/2018            207
+              10           1          14          12           2 11/26/2018            207
+
+  10 record(s) selected.
+
+
+SELECT * FROM BRANDS LIMIT 10
+
+BRAND_ID    BRAND_NAME                                   
+----------- ---------------------------------------------
+          1 WASA                                         
+          2 Nestle                                       
+          3 Tanqueray                                    
+          4 Thomas Henry                                 
+          5 Fruits-Import                                
+          6 Puerto de Indias                             
+          7 Kaergarden                                   
+          8 Geramont                                     
+          9 Activia                                      
+         10 Schweppes                                    
+
+  10 record(s) selected.
+
+
+SELECT * FROM PRODUCTS LIMIT 10
+
+PRODUCT_ID  PRODUCT_NAME                                  COST_PRICE  SALE_PRICE 
+----------- --------------------------------------------- ----------- -----------
+          1 Bread                                                   2          11
+          2 Milk                                                    2           5
+          3 Water                                                   1           3
+          4 Gin                                                    20          37
+          5 Tonic                                                   7           8
+          6 Apple                                                  14          49
+          7 Banana                                                 22          39
+          8 Butter                                                 14          29
+          9 Cheese                                                 33          61
+         10 Joghurt                                                23          53
+
+  10 record(s) selected.
+
+
+SELECT * FROM PAYMENTs LIMIT 10
+
+PAYMENT_ID  PAYMENT_METHOD                               
+----------- ---------------------------------------------
+          1 Visa                                         
+          2 MasterCard                                   
+          3 AmericanExpress                              
+          4 CASH                                         
+
+  4 record(s) selected.
+
+
+select Products.Product_Name, count(Ticket.Product_id) as COUNT from Ticket inner join Products on Ticket.Product_id = Products.Product_id group by Products.Product_Name order by COUNT desc limit 4
+
+PRODUCT_NAME                                  COUNT      
+--------------------------------------------- -----------
+Bread                                                  15
+Tonic                                                  15
+Butter                                                 13
+Wodka                                                  13
+
+  4 record(s) selected.
+
+
+SELECT SUM(DISTINCT AMOUNT)/COUNT(DISTINCT TICKET_ID) AS AVG_SPENDING FROM TICKET
+
+AVG_SPENDING
+------------
+         301
+
+  1 record(s) selected.
+
+
+select P.Payment_method, SUM(DISTINCT T.Amount) as REVENUE from Ticket T inner join PAYMENTS p on T.Payment_id = P.Payment_id group by P.Payment_method
+
+PAYMENT_METHOD                                REVENUE    
+--------------------------------------------- -----------
+AmericanExpress                                      1293
+CASH                                                  331
+MasterCard                                            878
+Visa                                                 2530
+
+  4 record(s) selected.
+
+
+ALTER TABLE PRODUCTS ADD COLUMN PROFIT INT DEFAULT 0
+DB20000I  The SQL command completed successfully.
+
+UPDATE PRODUCTS SET PROFIT = SALE_PRICE - COST_PRICE
+DB20000I  The SQL command completed successfully.
+
+SELECT B.Brand_name,SUM(P.PROFIT) as SUM_PROFIT FROM  PRODUCTS P inner join BRANDS B on P.Product_id = B.Brand_ID GROUP BY B.Brand_name ORDER BY SUM_PROFIT desc LIMIT 10
+
+BRAND_NAME                                    SUM_PROFIT 
+--------------------------------------------- -----------
+Multi                                                  49
+Puerto de Indias                                       35
+Schweppes                                              30
+Smirnoff                                               29
+Activia                                                28
+Kaergarden                                             17
+Thomas Henry                                           17
+Jamon Sevilla                                          16
+Geramont                                               15
+Monkey47                                               12
+
+  10 record(s) selected.
+
+
+ALTER TABLE TICKET ADD COLUMN WEEKDAY_NUMBER INT DEFAULT 0
+DB20000I  The SQL command completed successfully.
+
+UPDATE TICKET SET WEEKDAY_NUMBER = DAYOFWEEK(PURCHASE_DATE)
+DB20000I  The SQL command completed successfully.
+
+select * from TICKET limit 4
+
+PURCHASE_RECORDS TICKET_ID   PRODUCT_ID  BRAND_ID    PAYMENT_ID  PURCHASE_DATE AMOUNT      WEEKDAY_NUMBER
+---------------- ----------- ----------- ----------- ----------- ------------- ----------- --------------
+               1           1           1           2           1 11/26/2018            207              2
+               2           1           2          11           2 11/26/2018            207              2
+               3           1           3           9           2 11/26/2018            207              2
+               4           1           5           6           2 11/26/2018            207              2
+
+  4 record(s) selected.
+
+
+SELECT COUNT(PRODUCTS.PRODUCT_NAME) AS TIMES_BOUGHT , TICKET.WEEKDAY_NUMBER , PRODUCTS.PRODUCT_NAME FROM PRODUCTS INNER JOIN TICKET ON PRODUCTS.PRODUCT_ID = TICKET.PRODUCT_ID GROUP BY PRODUCTS.PRODUCT_NAME, TICKET.WEEKDAY_NUMBER HAVING TICKET.WEEKDAY_NUMBER > 6 ORDER BY TIMES_BOUGHT DESC LIMIT 3
+
+TIMES_BOUGHT WEEKDAY_NUMBER PRODUCT_NAME                                 
+------------ -------------- ---------------------------------------------
+           2              7 Bread                                        
+           2              7 Tonic                                        
+           2              7 Juice                                        
+
+  3 record(s) selected.
+
+
+[db2inst1@db2server_4dae6a ~]$ 

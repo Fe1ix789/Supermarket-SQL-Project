@@ -1,0 +1,299 @@
+DROP TABLE PRODUCTS;
+DROP TABLE PAYMENTS;
+DROP TABLE BRANDS;
+DROP TABLE TICKET;
+
+CREATE TABLE PRODUCTS (
+Product_id INT NOT NULL,
+Product_name VARCHAR(45) NOT NULL,
+Cost_price INT NOT NULL,
+Sale_price INT NOT NULL,
+PRIMARY KEY (Product_id)
+)ORGANIZE BY ROW;
+
+CREATE TABLE PAYMENTS (
+Payment_id INT NOT NULL,
+Payment_method VARCHAR(45) NOT NULL,
+PRIMARY KEY (Payment_id)
+)ORGANIZE BY ROW;
+
+CREATE TABLE BRANDS(
+Brand_id INT NOT NULL,
+Brand_name VARCHAR(45) NOT NULL,
+PRIMARY KEY(Brand_id)
+)
+ORGANIZE BY ROW;
+
+Create TABLE TICKET( 
+Purchase_Records INT GENERATED ALWAYS AS IDENTITY (START WITH 1 INCREMENT BY 1) NOT NULL PRIMARY KEY, 
+Ticket_id INT NOT NULL, 
+Product_id INT NOT NULL, 
+Brand_id INT NOT NULL, 
+Payment_id INT NOT NULL, 
+Purchase_date DATE NOT NULL, 
+Amount INT, 
+FOREIGN KEY (Product_id) REFERENCES PRODUCTS (Product_id),  
+FOREIGN KEY (Brand_id) REFERENCES BRANDS (Brand_id), 
+FOREIGN KEY (Payment_id)  REFERENCES PAYMENTS (Payment_id)
+)
+ORGANIZE BY ROW;
+
+
+INSERT INTO PAYMENTS (Payment_id, Payment_method) VALUES
+(1,'Visa'),
+(2,'MasterCard'),
+(3,'AmericanExpress'),
+(4,'CASH');
+
+INSERT INTO PRODUCTS(Product_id,Product_name,Sale_Price,Cost_Price) VALUES
+(1,'Bread',11,2),
+(2,'Milk',5,2),
+(3,'Water',3,1),
+(4,'Gin',37,20),
+(5,'Tonic',8,7),
+(6,'Apple',49,14),
+(7,'Banana',39,22),
+(8,'Butter',29,14),
+(9,'Cheese',61,33),
+(10,'Joghurt',53,23),
+(11,'Juice',52,3),
+(12,'Wodka',39,10),
+(13,'Jamon',26,14),
+(14,'Whisky',36,20);
+
+INSERT INTO BRANDS (BRAND_ID, BRAND_NAME) VALUES
+(1,'WASA'),
+(2,'Nestle'),
+(3,'Tanqueray'),
+(4,'Thomas Henry'),
+(5,'Fruits-Import'),
+(6,'Puerto de Indias'),
+(7,'Kaergarden'),
+(8,'Geramont'),
+(9,'Activia'),
+(10,'Schweppes'),
+(11,'Multi'),
+(12,'Smirnoff'),
+(13,'Monkey47'),
+(14,'Jamon Sevilla'),
+(15,'Jamoneria'),
+(16,'Fruteria'),
+(17,'DANONE'),
+(18,'Bombay'),
+(19,'JW');
+
+
+INSERT INTO TICKET (Ticket_id, Product_id, Brand_id, Payment_id, Purchase_date, Amount) VALUES
+(1,1,2,1,'2018-11-26',207),
+(1,2,11,2,'2018-11-26',207),
+(1,3,9,2,'2018-11-26',207),
+(1,5,6,2,'2018-11-26',207),
+(1,5,5,2,'2018-11-26',207),
+(1,7,12,2,'2018-11-26',207),
+(1,8,4,2,'2018-11-26',207),
+(1,8,12,2,'2018-11-26',207),
+(1,12,11,2,'2018-11-26',207),
+(1,14,12,2,'2018-11-26',207),
+(2,2,8,1,'2018-11-27',300),
+(2,3,13,3,'2018-11-27',300),
+(2,3,1,3,'2018-11-27',300),
+(2,4,6,3,'2018-11-27',300),
+(2,5,15,3,'2018-11-27',300),
+(2,7,13,3,'2018-11-27',300),
+(2,8,4,3,'2018-11-27',300),
+(2,9,13,3,'2018-11-27',300),
+(2,10,5,3,'2018-11-27',300),
+(2,13,16,3,'2018-11-27',300),
+(2,14,10,3,'2018-11-27',300),
+(3,3,3,4,'2018-11-28',280),
+(3,4,6,4,'2018-11-28',280),
+(3,7,18,4,'2018-11-28',280),
+(3,9,10,4,'2018-11-28',280),
+(3,12,9,4,'2018-11-28',280),
+(3,12,18,4,'2018-11-28',280),
+(3,13,5,4,'2018-11-28',280),
+(3,14,19,4,'2018-11-28',280),
+(4,1,19,1,'2018-11-29',391),
+(4,3,1,1,'2018-11-29',391),
+(4,4,17,1,'2018-11-29',391),
+(4,5,14,1,'2018-11-29',391),
+(4,5,18,1,'2018-11-29',391),
+(4,6,12,1,'2018-11-29',391),
+(4,10,4,1,'2018-11-29',391),
+(4,10,12,1,'2018-11-29',391),
+(4,11,8,1,'2018-11-29',391),
+(4,11,10,1,'2018-11-29',391),
+(4,12,17,1,'2018-11-29',391),
+(4,13,12,1,'2018-11-29',391),
+(5,5,1,3,'2018-11-30',322),
+(5,5,9,3,'2018-11-30',322),
+(5,6,16,3,'2018-11-30',322),
+(5,8,10,3,'2018-11-30',322),
+(5,9,15,3,'2018-11-30',322),
+(5,10,7,3,'2018-11-30',322),
+(5,11,5,3,'2018-11-30',322),
+(5,13,1,3,'2018-11-30',322),
+(5,14,18,3,'2018-11-30',322),
+(6,1,11,1,'2018-12-01',221),
+(6,2,13,1,'2018-12-01',221),
+(6,3,5,1,'2018-12-01',221),
+(6,4,12,1,'2018-12-01',221),
+(6,5,2,1,'2018-12-01',221),
+(6,10,13,1,'2018-12-01',221),
+(6,11,12,1,'2018-12-01',221),
+(6,11,3,1,'2018-12-01',221),
+(7,1,7,1,'2018-12-02',451),
+(7,2,17,1,'2018-12-02',451),
+(7,2,8,1,'2018-12-02',451),
+(7,2,17,1,'2018-12-02',451),
+(7,4,2,1,'2018-12-02',451),
+(7,6,1,1,'2018-12-02',451),
+(7,6,5,1,'2018-12-02',451),
+(7,7,6,1,'2018-12-02',451),
+(7,8,19,1,'2018-12-02',451),
+(7,9,7,1,'2018-12-02',451),
+(7,9,6,1,'2018-12-02',451),
+(7,9,6,1,'2018-12-02',451),
+(7,12,6,1,'2018-12-02',451),
+(8,1,19,2,'2018-12-03',303),
+(8,3,16,2,'2018-12-03',303),
+(8,3,4,2,'2018-12-03',303),
+(8,6,12,2,'2018-12-03',303),
+(8,7,2,2,'2018-12-03',303),
+(8,7,15,2,'2018-12-03',303),
+(8,8,14,2,'2018-12-03',303),
+(8,11,9,2,'2018-12-03',303),
+(8,11,12,2,'2018-12-03',303),
+(8,13,14,2,'2018-12-03',303),
+(9,1,7,1,'2018-12-04',315),
+(9,1,6,1,'2018-12-04',315),
+(9,4,11,1,'2018-12-04',315),
+(9,8,14,1,'2018-12-04',315),
+(9,9,2,1,'2018-12-04',315),
+(9,11,9,1,'2018-12-04',315),
+(9,12,3,1,'2018-12-04',315),
+(9,12,16,1,'2018-12-04',315),
+(9,14,4,1,'2018-12-04',315),
+(10,1,4,3,'2018-12-05',164),
+(10,1,2,3,'2018-12-05',164),
+(10,2,3,3,'2018-12-05',164),
+(10,3,5,3,'2018-12-05',164),
+(10,4,5,3,'2018-12-05',164),
+(10,5,5,3,'2018-12-05',164),
+(10,5,1,3,'2018-12-05',164),
+(10,8,12,3,'2018-12-05',164),
+(10,11,6,3,'2018-12-05',164),
+(11,2,8,2,'2018-12-06',368),
+(11,5,4,2,'2018-12-06',368),
+(11,5,10,2,'2018-12-06',368),
+(11,7,18,2,'2018-12-06',368),
+(11,10,17,2,'2018-12-06',368),
+(11,10,15,2,'2018-12-06',368),
+(11,11,18,2,'2018-12-06',368),
+(11,12,10,2,'2018-12-06',368),
+(11,12,16,2,'2018-12-06',368),
+(11,14,16,2,'2018-12-06',368),
+(11,14,17,2,'2018-12-06',368),
+(12,1,6,3,'2018-12-07',375),
+(12,1,10,3,'2018-12-07',375),
+(12,5,8,3,'2018-12-07',375),
+(12,7,14,3,'2018-12-07',375),
+(12,7,10,3,'2018-12-07',375),
+(12,9,5,3,'2018-12-07',375),
+(12,9,12,3,'2018-12-07',375),
+(12,10,5,3,'2018-12-07',375),
+(12,10,16,3,'2018-12-07',375),
+(12,12,2,3,'2018-12-07',375),
+(13,1,8,4,'2018-12-08',51),
+(13,3,16,4,'2018-12-08',51),
+(13,5,1,4,'2018-12-08',51),
+(13,8,17,4,'2018-12-08',51),
+(13,14,19,4,'2018-12-08',51),
+(14,1,7,3,'2018-12-09',132),
+(14,2,7,3,'2018-12-09',132),
+(14,8,2,3,'2018-12-09',132),
+(14,11,17,3,'2018-12-09',132),
+(15,1,15,1,'2018-12-10',645),
+(15,1,15,1,'2018-12-10',645),
+(15,2,1,1,'2018-12-10',645),
+(15,2,3,1,'2018-12-10',645),
+(15,2,14,1,'2018-12-10',645),
+(15,3,2,1,'2018-12-10',645),
+(15,4,2,1,'2018-12-10',645),
+(15,5,7,1,'2018-12-10',645),
+(15,6,8,1,'2018-12-10',645),
+(15,8,7,1,'2018-12-10',645),
+(15,8,15,1,'2018-12-10',645),
+(15,8,7,1,'2018-12-10',645),
+(15,9,8,1,'2018-12-10',645),
+(15,10,3,1,'2018-12-10',645),
+(15,10,13,1,'2018-12-10',645),
+(15,11,13,1,'2018-12-10',645),
+(15,12,10,1,'2018-12-10',645),
+(15,12,3,1,'2018-12-10',645),
+(15,12,13,1,'2018-12-10',645);
+(15,13,4,1,'2018-12-10',645),
+(15,13,5,1,'2018-12-10',645),
+(15,14,19,1,'2018-12-10',645);
+
+
+
+SELECT * FROM TICKET LIMIT 10;
+SELECT * FROM BRANDS LIMIT 10;
+SELECT * FROM PRODUCTS LIMIT 10;
+SELECT * FROM PAYMENTs LIMIT 10;
+
+
+---- QUESTION 1
+--- Done
+-- Which are the top 4 product sales?
+
+select Products.Product_Name, count(Ticket.Product_id) as COUNT from Ticket inner join Products on Ticket.Product_id = Products.Product_id
+group by Products.Product_Name
+order by COUNT desc
+limit 4;
+
+
+---- QUESTION 2
+--- Done / needs testing
+--- What is the average amount spent per purchase?
+SELECT SUM(DISTINCT AMOUNT)/COUNT(DISTINCT TICKET_ID) AS AVG_SPENDING FROM TICKET;
+
+
+---- QUESTION 3
+--- Done / needs testing
+-- What is the revenue per type of credit card? 
+select P.Payment_method, SUM(DISTINCT T.Amount) as REVENUE from Ticket T inner join PAYMENTS p on T.Payment_id = P.Payment_id
+group by P.Payment_method;
+
+
+---- QUESTION 4
+-- Which brand makes us earn more money (profit)?
+ALTER TABLE PRODUCTS 
+ADD COLUMN PROFIT INT DEFAULT 0;
+UPDATE PRODUCTS
+SET PROFIT = SALE_PRICE - COST_PRICE;
+
+SELECT B.Brand_name,SUM(P.PROFIT) as SUM_PROFIT FROM  PRODUCTS P inner join BRANDS B on 
+P.Product_id = B.Brand_ID
+GROUP BY B.Brand_name 
+ORDER BY SUM_PROFIT desc
+LIMIT 10;
+
+---- QUESTION 5
+-- DONE 
+-- Which 3 product3 are most likely bought on a sunday?
+ALTER TABLE TICKET 
+ADD COLUMN WEEKDAY_NUMBER INT DEFAULT 0;
+
+UPDATE TICKET
+SET WEEKDAY_NUMBER = DAYOFWEEK(PURCHASE_DATE);
+
+select * from TICKET
+limit 4;
+
+SELECT COUNT(PRODUCTS.PRODUCT_NAME) AS TIMES_BOUGHT , TICKET.WEEKDAY_NUMBER , PRODUCTS.PRODUCT_NAME FROM PRODUCTS INNER JOIN TICKET ON PRODUCTS.PRODUCT_ID = TICKET.PRODUCT_ID 
+GROUP BY PRODUCTS.PRODUCT_NAME, TICKET.WEEKDAY_NUMBER 
+HAVING TICKET.WEEKDAY_NUMBER > 6 
+ORDER BY TIMES_BOUGHT DESC
+LIMIT 3;
