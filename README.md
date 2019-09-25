@@ -14,14 +14,14 @@ Hand in:
   4. SQL with the answers __for each question__.
       * Which are the top 3 product sales?
       * Show the revenue per type of credit card.
-      * What is the average amount spent per purchase.
+      * What is the average amount spent per purchase?
       * Which brand makes us earn more money (profit)?
-      * You make your 5th question, and answer it.
+      * You make your 5th question, and answer it.    -> _Which product is most likely bought on SUNDAYS?_
   5. Presentation (15 min PowerPoint)
       * Explain the bussiness, how it works.
       * Presents the physical DB2 model.
       * Describe the data for each table.
-      * Show your question & answer it.
+      * Show your question & answer it. 
       
 ## Presentation Slides ##
 
